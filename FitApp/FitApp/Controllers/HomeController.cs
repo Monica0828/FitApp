@@ -1,18 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using FitApp.BusinessLogic;
+using FitApp.Interfaces;
 using System.Web.Mvc;
 
 namespace FitApp.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private readonly IFitAppManager  manager;
+
+        public HomeController()
         {
-            return View();
+            manager = new SqlFitAppManager();
         }
 
+        public ActionResult Index()
+        {
+            var classes = manager.GetAll();
+
+            return View(classes); 
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
