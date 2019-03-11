@@ -1,0 +1,55 @@
+﻿@model IEnumerable<FitApp.Models.GymSubscription>
+
+@{
+    ViewBag.Title = "SeeSubscriptions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>My subscriptions</h2>
+
+<p>
+    @Html.ActionLink("Add new subscription", "AddSubscription")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GymName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValidFrom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValidTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.GymName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValidFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValidTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Client.FirstName)
+            @Html.DisplayFor(modelItem => item.Client.LastName)
+        </td>
+
+    </tr>
+}
+
+</table>

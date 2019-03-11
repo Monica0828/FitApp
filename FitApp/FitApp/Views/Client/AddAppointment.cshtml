@@ -1,0 +1,66 @@
+﻿@model IEnumerable<FitApp.Models.GymClassSchedule>
+
+@{
+    ViewBag.Title = "AddAppointment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="notification-wrapper">
+
+</div>
+
+<h2>Add Appointment</h2>
+
+<br />
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Available classes
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <tr>
+                    <th>
+                        Class Name
+                    </th>
+                    <th>
+                        Trainer Name
+                    </th>
+                    <th>
+                        Date and time
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Class.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Trainer.FirstName)
+                            @Html.DisplayFor(modelItem => item.Trainer.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            <input type="hidden" id="scheduleId" name="scheduleId" value="@item.ScheduleId" />
+                            <button type="submit" class="btn btn-danger" id="submitAppointment">Reserve</button>
+                        </td>
+
+
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>

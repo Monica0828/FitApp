@@ -1,65 +1,86 @@
-﻿@model FitApp.Models.Register
+﻿@using FitApp.Models
+
+@model Register
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "";
 }
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Register</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+<head>
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <link href="../css/sb-admin.css" rel="stylesheet">
+</head>
+<body class="bg-dark">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="container">
+            <div class="card card-register mx-auto mt-5">
+                <div class="card-header">Register an Account</div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-label-group">
+                                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @required = "required", @autofocus = "autofocus", @type = "text", @class = "form-control", @id = "firstName", @placeholder = "First name" } })
+                                        @*<input type="text" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">*@
+                                        <label for="firstName">First name</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-label-group">
+                                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @required = "required", @autofocus = "autofocus", @type = "text", @class = "form-control", @id = "lastName", @placeholder = "Last name" } })
+                                        @*<input type="text" id="lastName" class="form-control" placeholder="Last name" required="required">*@
+                                        <label for="lastName">Last name</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-label-group">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @required = "required", @autofocus = "autofocus", @type = "email", @class = "form-control", @id = "inputEmail", @placeholder = "Email address" } })
+                                @*<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required">*@
+                                <label for="inputEmail">Email address</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-label-group">
+                                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @required = "required", @autofocus = "autofocus", @type = "password", @class = "form-control", @id = "inputPassword", @placeholder = "Password" } })
+                                        <label for="inputPassword">Password</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-label-group">
+                                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @required = "required", @autofocus = "autofocus", @type = "password", @class = "form-control", @id = "confirmPassword", @placeholder = "Confirm password" } })
+                                        <label for="confirmPassword">Confirm password</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-label-group">
+                                @Html.EnumDropDownListFor(x => x.UserType,
+                              new { @class= "browser-default custom-select mb-4" , @style="height:40px"})
+
+                            </div>
+                        </div>
+
+
+                        <button class="btn btn-primary btn-block" type="submit">Register</button>
+                    </form>
+                    <div class="text-center">
+                        <a class="d-block small mt-3" href="../Account/Login">Login Page</a>
+                        <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    }
+</body>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

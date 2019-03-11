@@ -65,6 +65,14 @@
     <Compile Include="Migrations\201902261148410_FitAppUser_Changes.Designer.cs">
       <DependentUpon>201902261148410_FitAppUser_Changes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903061506493_Add_table_GymSubscription.cs" />
+    <Compile Include="Migrations\201903061506493_Add_table_GymSubscription.Designer.cs">
+      <DependentUpon>201903061506493_Add_table_GymSubscription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903062102158_Add_table_Notification.cs" />
+    <Compile Include="Migrations\201903062102158_Add_table_Notification.Designer.cs">
+      <DependentUpon>201903062102158_Add_table_Notification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,6 +95,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902261148410_FitAppUser_Changes.resx">
       <DependentUpon>201902261148410_FitAppUser_Changes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903061506493_Add_table_GymSubscription.resx">
+      <DependentUpon>201903061506493_Add_table_GymSubscription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903062102158_Add_table_Notification.resx">
+      <DependentUpon>201903062102158_Add_table_Notification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

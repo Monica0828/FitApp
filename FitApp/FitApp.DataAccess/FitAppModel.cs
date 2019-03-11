@@ -14,6 +14,9 @@ namespace FitApp.DataAccess
         public virtual DbSet<GymClass> GymClasses { get; set; }
         public virtual DbSet<GymClassSchedule> GymClassSchedules { get; set; }
         public virtual DbSet<Appointment> Appointments { get; set; }
+        public virtual DbSet<GymSubscription> GymSubscriptions { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<UserLoginHistory> UserHistory { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -41,6 +44,12 @@ namespace FitApp.DataAccess
                     .HasRequired(cs => cs.ClassSchedule)
                     .WithMany()
                     .HasForeignKey(x => x.ScheduleId)
+                    .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<GymSubscription>()
+                    .HasRequired(gs => gs.Client)
+                    .WithMany()
+                    .HasForeignKey(x => x.UserId)
                     .WillCascadeOnDelete(false);
 
         }

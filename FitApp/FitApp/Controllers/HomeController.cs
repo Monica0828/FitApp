@@ -15,9 +15,9 @@ namespace FitApp.Controllers
 
         public ActionResult Index()
         {
-            var classes = manager.GetAll();
+            var classes = manager.GetAllClasses();
 
-            return View(classes); 
+            return View(classes);
         }
         public ActionResult About()
         {
@@ -30,6 +30,11 @@ namespace FitApp.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult Chart()
+        {
             return View();
         }
     }

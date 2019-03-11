@@ -1,0 +1,41 @@
+﻿@model IEnumerable<FitApp.Models.Appointment>
+
+@{
+    ViewBag.Title = "SeeAppointments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>My Appointments</h2>
+
+<br />
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+
+        <th>
+            Date
+        </th>
+        <th>
+            Trainer
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassSchedule.Class.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassSchedule.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassSchedule.Trainer.FirstName)
+                @Html.DisplayFor(modelItem => item.ClassSchedule.Trainer.LastName)
+            </td>
+        </tr>
+    }
+
+</table>

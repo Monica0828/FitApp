@@ -4,6 +4,8 @@ using FitApp.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -34,7 +36,7 @@ namespace FitApp.Controllers
                 var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
 
                 authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, userIdentity);
-                return RedirectToAction(nameof(login));
+                return RedirectToAction("Index", "Home");
             }
 
             return RedirectToAction(nameof(login));
@@ -57,9 +59,58 @@ namespace FitApp.Controllers
                 Birthdate = DateTime.Now
             };
 
-            _repository.RegisterUser(user, registerModel.Password);
+            _repository.RegisterUser(user, registerModel.Password, registerModel.UserType.ToString());
 
             return RedirectToAction(nameof(Login));
+        }
+
+        [HttpGet]
+        public ActionResult LogOut()
+        {
+            var authenticationManager = HttpContext.GetOwinContext().Authentication;
+            authenticationManager.SignOut();
+
+            var logHistory = new UserLoginHistory()
+            {
+                UserId = User.Identity.GetUserId(),
+                LastLoggenOn = DateTime.Now
+            };
+
+            _repository.SaveLoginHistory(logHistory);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public JsonResult SendNotification()
+        {
+            var loggedOn = _repository.GetLastLoggenOn(User.Identity.GetUserId());
+
+            if (loggedOn != DateTime.MinValue)
+            {
+                var list = _repository.GetNewGymClasses(loggedOn, User.Identity.GetUserId()).Select(gc => new Notification
+                {
+                    UserId = User.Identity.GetUserId(),
+                    Message = $"New class {gc.Name.ToLower()} was added",
+                    GymClassId= gc.GymClassId,
+                    Seen = false
+                }).ToList();
+
+                _repository.SaveNotifications(list);
+            }
+
+            var OfNotification= _repository.GetNotifications(User.Identity.GetUserId());
+            return Json(OfNotification, JsonRequestBehavior.AllowGet);
+            //return _repository.GetNotifications(User.Identity.GetUserId());
+            ///return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public void MarkNotificationsAsRead()
+        {
+            var list = _repository.GetNotifications(User.Identity.GetUserId());
+
+            _repository.MarkNotificationsAsRead(list);
         }
     }
 }

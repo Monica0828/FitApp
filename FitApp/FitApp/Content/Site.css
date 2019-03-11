@@ -1,24 +1,52 @@
-﻿body {
-    padding-top: 50px;
+﻿/*body {
     padding-bottom: 20px;
 }
 
-/* Set padding to keep content from hitting the edges */
+.navbar {
+    background-color: #6b6fff !important;
+}
+
+.nav-link, .navbar-brand {
+    color: white !important;
+}
+
+.navbar a {
+    font-size: 20px !important;
+    font-weight: 400 !important;
+}
+
+.dropdown-menu a {
+    font-size: 15px !important;
+    font-weight: 400 !important;
+}
+
+div, table td, table th, h4, p {
+    font-size: 18px !important;
+    font-weight: 300 !important;
+}
+
+.form-control, .h4, .btn-info {
+    font-size: 18px !important;
+    font-weight: 300 !important;
+}
+
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
+
 .dl-horizontal dt {
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
+
 input,
 select,
 textarea {
     max-width: 280px;
 }
+
+nav-item avatar dropdown > a > img {
+    height: 50px;
+}*/
